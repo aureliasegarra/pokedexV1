@@ -22,7 +22,6 @@ app.use(express.urlencoded({extended:true}));
 //Add router
 app.use(router);
 
-
 //Server launched
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
