@@ -19,7 +19,9 @@ CREATE TABLE "pokemon" (
   "attack_spe" INTEGER NOT NULL,
   "defense_spe" INTEGER NOT NULL,
   "speed" INTEGER NOT NULL,
-  "number" INTEGER NOT NULL
+  "number" INTEGER NOT NULL,
+  "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  "updated_at" TIMESTAMPTZ
 );
 
 --
@@ -187,7 +189,9 @@ INSERT INTO "pokemon" ("id", "name", "pv", "attack", "defense", "attack_spe", "d
 CREATE TABLE "type" (
   "id" INTEGER NOT NULL,
   "name" TEXT NOT NULL,
-  "color" TEXT NOT NULL
+  "color" TEXT NOT NULL,
+  "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  "updated_at" TIMESTAMPTZ
 );
 
 --
@@ -220,8 +224,9 @@ INSERT INTO "type" ("id", "name", "color") VALUES
 
 CREATE TABLE "pokemon_type" (
   "id" INTEGER NOT NULL,
-  "pokemon_number" INTEGER NOT NULL,
-  "type_id" INTEGER NOT NULL
+  "pokemon_number" INTEGER NOT NULL REFERENCES pokemon("number") ON DELETE CASCADE,
+  "type_id" INTEGER NOT NULL REFERENCES type("id") ON DELETE CASCADE,
+  "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 --
